@@ -1,54 +1,113 @@
-# React + TypeScript + Vite
+# Job Listings with Filtering
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive web application that displays job listings with filtering capabilities. Built with React, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+![Screenshot of Job Listings App](https://via.placeholder.com/800x600/5CA5A5/FFFFFF?text=Job+Listings+App)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- View job listings with company details, position, and requirements
+- Filter jobs by multiple criteria including role, level, languages, and tools
+- Responsive design that works on mobile, tablet, and desktop
+- Clean and modern UI with smooth animations
+- Built with TypeScript for type safety
+- Styled with Tailwind CSS for rapid UI development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technologies Used
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- React 19
+- TypeScript
+- Tailwind CSS
+- Vite (build tool)
+- React Hooks for state management
+- Mobile-first responsive design
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or later)
+- npm or pnpm (recommended)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/job-listings-with-filtering-react.git
+   cd job-listings-with-filtering-react
+   ```
+
+2. Install dependencies:
+   ```bash
+   pnpm install
+   # or
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   pnpm dev
+   # or
+   npm run dev
+   ```
+
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Usage
+
+- Browse through the job listings
+- Click on any filter button to filter jobs by that criteria
+- Multiple filters can be applied simultaneously
+- Click the "Clear" button to remove all filters
+- Click the "×" button next to a filter to remove that specific filter
+
+## Project Structure
+
+```
+src/
+├── assets/            # Static assets like images
+├── components/         # Reusable React components
+│   ├── Filter.tsx     # Filter bar component
+│   └── JobCard.tsx    # Job listing card component
+├── hooks/              # Custom React hooks
+│   └── UseJobList.tsx  # Job list and filtering logic
+├── types/              # TypeScript type definitions
+│   └── job.type.ts     # Job type definitions and data conversion
+├── data/               # Application data
+│   └── data.json       # Job listings data
+├── App.tsx             # Main application component
+└── main.tsx            # Application entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Available Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `pnpm dev` - Start the development server
+- `pnpm build` - Build the application for production
+- `pnpm lint` - Run ESLint for code quality checks
+- `pnpm preview` - Preview the production build locally
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Customization
+
+### Adding New Job Listings
+
+Edit the `src/data/data.json` file to add or modify job listings. The application will automatically pick up the changes when you save the file.
+
+### Styling
+
+This project uses Tailwind CSS for styling. You can customize the design by modifying the Tailwind configuration in `tailwind.config.js`.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Acknowledgements
+
+- [Frontend Mentor](https://www.frontendmentor.io/) for the design challenge
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
