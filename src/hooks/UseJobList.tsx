@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { type Job, convertToJob } from "../types/job.type";
 import data from "../data/data.json";
 
@@ -25,7 +25,8 @@ function saveFilters(filters: string[]): void {
 }
 
 export default function useJobList() {
-  const jobsData: Job[] = convertToJob(data);
+  // Memoize the jobs data to prevent recreation on every render
+  const jobsData = useMemo(() => convertToJob(data), []);
   const [jobs, setJobs] = useState<Job[]>(jobsData);
   const [filters, setInternalFilters] = useState<string[]>([]);
   
@@ -57,9 +58,10 @@ export default function useJobList() {
     setFilters([]);
   };
 
+  // Filter jobs based on active filters
   useEffect(() => {
     if (filters.length > 0) {
-      const filteredJobs: Job[] = jobsData.filter((job) => {
+      const filteredJobs = jobsData.filter((job) => {
         return filters.every(
           (filter) =>
             job.position === filter ||
@@ -73,7 +75,7 @@ export default function useJobList() {
     } else {
       setJobs(jobsData);
     }
-  }, [filters, jobsData]);
+  }, [filters]); // Removed jobsData from dependencies since it's now stable
 
   return {
     jobs,
