@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import bgHeaderDesktop from "./assets/images/bg-header-desktop.svg";
+import bgHeaderMobile from "./assets/images/bg-header-mobile.svg";
+import JobCard from "./components/JobCard";
+import FilterBar from "./components/Filter";
+import useJobList from "./hooks/UseJobList";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { jobs, filters, handleToggleFilter, handleClearFilters } =
+    useJobList();
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="min-h-[100dvh] bg-iceberg-100 relative">
+        <picture
+          className={`w-full z-0 ${filters.length > 0 ? "absolute top-0" : ""}`}
+        >
+          <source srcSet={bgHeaderDesktop} media="(min-width: 768px)" />
+          <img
+            src={bgHeaderMobile}
+            alt="Background image"
+            className="  bg-teal-550 w-full"
+          />
+        </picture>
+        <main className="mx-auto p-2.5 max-w-[655px] md:max-w-[1110px] z-10 relative">
+          {filters.length > 0 && (
+            <FilterBar
+              filters={filters}
+              toggleFilter={handleToggleFilter}
+              clearFilters={handleClearFilters}
+            />
+          )}
+          <ul className="mt-16 flex flex-col gap-19 md:gap-6 md:mt-17 mb-14">
+            {jobs.length > 0 &&
+              jobs.map((job, index) => (
+                <JobCard
+                  key={index}
+                  job={job}
+                  toggleFilter={handleToggleFilter}
+                />
+              ))}
+          </ul>
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
